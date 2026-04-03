@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact — Grey Taurus LLC</title>
+  <meta name="description" content="Contact Grey Taurus LLC for partnership inquiries, operational support, or program questions. We respond to all inquiries within 2 business days." />
+  <meta property="og:title" content="Contact Grey Taurus LLC" />
+  <meta property="og:description" content="Partnership inquiries welcome. We respond to all inquiries within 2 business days." />
+  <meta property="og:type" content="website" />
+  <link rel="canonical" href="https://greytaurus.com/contact.html" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header id="site-header">
+    <nav class="nav" aria-label="Main navigation">
+      <a href="index.html" class="nav-logo">
+        <span class="nav-logo-name">Grey Taurus</span>
+        <span class="nav-logo-sub">Operations &amp; Program Support</span>
+      </a>
+      <ul class="nav-links" role="list">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="capabilities.html" class="nav-link">Capabilities</a></li>
+        <li><a href="about.html" class="nav-link">About</a></li>
+        <li><a href="partnerships.html" class="nav-link">Partnerships</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
+      </ul>
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu">
+        <i data-lucide="menu" width="22" height="22"></i>
+      </button>
+    </nav>
+  </header>
+
+  <div class="nav-overlay" id="nav-overlay" aria-hidden="true"></div>
+  <div class="nav-drawer" id="nav-drawer" role="dialog" aria-modal="true" aria-label="Navigation menu">
+    <div class="nav-drawer-header">
+      <span class="nav-logo-name">Grey Taurus</span>
+      <button class="nav-drawer-close" id="nav-drawer-close" aria-label="Close menu">
+        <i data-lucide="x" width="22" height="22"></i>
+      </button>
+    </div>
+    <nav class="nav-drawer-links" aria-label="Mobile navigation">
+      <a href="index.html" class="nav-drawer-link">Home</a>
+      <a href="capabilities.html" class="nav-drawer-link">Capabilities</a>
+      <a href="about.html" class="nav-drawer-link">About</a>
+      <a href="partnerships.html" class="nav-drawer-link">Partnerships</a>
+      <a href="contact.html" class="nav-drawer-link">Contact</a>
+    </nav>
+  </div>
+
+  <main id="main">
+
+    <div class="page-header">
+      <div class="container reveal">
+        <p class="page-header-eyebrow">Get in Touch</p>
+        <h1>Contact</h1>
+      </div>
+    </div>
+
+    <section class="section">
+      <div class="container">
+        <div class="grid-2 reveal">
+
+          <!-- Form -->
+          <div>
+            <form id="contact-form" action="#" novalidate>
+              <div class="form-grid">
+
+                <div class="form-field">
+                  <label class="form-label" for="name">Name</label>
+                  <input
+                    class="form-input"
+                    type="text"
+                    id="name"
+                    name="name"
+                    autocomplete="name"
+                    data-required
+                    aria-describedby="name-error"
+                    aria-required="true"
+                  />
+                  <span class="error-text" id="name-error" role="alert">Please enter your name.</span>
+                </div>
+
+                <div class="form-field">
+                  <label class="form-label" for="email">Email</label>
+                  <input
+                    class="form-input"
+                    type="email"
+                    id="email"
+                    name="email"
+                    autocomplete="email"
+                    data-required
+                    aria-describedby="email-error"
+                    aria-required="true"
+                  />
+                  <span class="error-text" id="email-error" role="alert">Please enter your email address.</span>
+                </div>
+
+                <div class="form-field">
+                  <label class="form-label" for="organization">Organization</label>
+                  <input
+                    class="form-input"
+                    type="text"
+                    id="organization"
+                    name="organization"
+                    autocomplete="organization"
+                    data-required
+                    aria-describedby="organization-error"
+                    aria-required="true"
+                  />
+                  <span class="error-text" id="organization-error" role="alert">Please enter your organization.</span>
+                </div>
+
+                <div class="form-field">
+                  <label class="form-label" for="message">Message</label>
+                  <textarea
+                    class="form-textarea"
+                    id="message"
+                    name="message"
+                    data-required
+                    aria-describedby="message-error"
+                    aria-required="true"
+                  ></textarea>
+                  <span class="error-text" id="message-error" role="alert">Please enter your message.</span>
+                </div>
+
+                <div>
+                  <button type="submit" class="form-submit">
+                    Send Message
+                    <i data-lucide="arrow-right" width="16" height="16"></i>
+                  </button>
+                </div>
+
+              </div>
+            </form>
+          </div>
+
+          <!-- Right copy -->
+          <div class="contact-right">
+            <h3>Partnership inquiries welcome.</h3>
+            <p>We work with nonprofits, real estate firms, contractors, vendors, and program operators. Tell us about your initiative and how we might support your work.</p>
+            <p>We respond to all inquiries within 2 business days.</p>
+            <a href="mailto:admin@greytaurus.com" class="contact-email">
+              <i data-lucide="mail" width="16" height="16"></i>
+              admin@greytaurus.com
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-top">
+          <div class="footer-brand">
+            <span class="footer-brand-name">Grey Taurus LLC</span>
+            <span class="footer-brand-tagline">Operations &bull; Logistics &bull; Program Support</span>
+          </div>
+          <nav class="footer-nav" aria-label="Footer navigation">
+            <a href="index.html">Home</a>
+            <a href="capabilities.html">Capabilities</a>
+            <a href="about.html">About</a>
+            <a href="partnerships.html">Partnerships</a>
+            <a href="contact.html">Contact</a>
+          </nav>
+        </div>
+        <div class="footer-bottom">
+          <span class="footer-copy">&copy; 2025 Grey Taurus LLC. All rights reserved.</span>
+          <a href="mailto:admin@greytaurus.com" class="footer-email">admin@greytaurus.com</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script src="js/main.js" defer></script>
+</body>
+</html>

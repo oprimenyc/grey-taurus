@@ -1,0 +1,134 @@
+Build a complete, production-ready static website for Grey Taurus LLC. Create exactly 7 files inside a folder called grey-taurus/. Do not use any frameworks, npm, or build tools. Pure HTML, CSS, and vanilla JavaScript only.
+
+FILES TO CREATE:
+grey-taurus/index.html
+grey-taurus/capabilities.html
+grey-taurus/about.html
+grey-taurus/partnerships.html
+grey-taurus/contact.html
+grey-taurus/css/style.css
+grey-taurus/js/main.js
+
+BRAND: Grey Taurus LLC — Operations, Logistics, and Program Support. Florida-based. Government-friendly. Dark premium aesthetic. Gold accent (#c9a96e). No startup vibes.
+
+DESIGN RULES:
+- Background #0f1117, surface #161b26, text #e8eaf0, muted #8a95a3, accent gold #c9a96e
+- Font: Inter from Google Fonts CDN
+- Borderless fluid layout, no blocky cards, no borders between sections
+- All buttons are free-floating text links with hover underline animation, NOT pill buttons
+- No emojis anywhere — use Lucide icons via CDN: https://unpkg.com/lucide@latest/dist/umd/lucide.min.js
+- Icons: activity, truck, clipboard-list, users, briefcase, building, file-text, shopping-bag, arrow-right, menu, x, mail
+- Smooth scroll reveal: sections start opacity:0 translateY(24px), animate to visible on scroll using IntersectionObserver
+- Page fade-in on load via CSS @keyframes
+- Hover transitions: 150ms ease on all interactive elements
+- cubic-bezier(0.16, 1, 0.3, 1) easing everywhere
+- Hero font: clamp(2.5rem, 5vw, 4.5rem)
+- Container max-width 1140px
+
+NAVIGATION (shared across all pages):
+- Desktop: top sticky nav, logo left "GREY TAURUS" spaced caps, links right: Home | Capabilities | About | Partnerships | Contact
+- Logo subtext: "Operations & Program Support" in muted small text
+- Active page link gets gold color + subtle underline
+- On scroll past 40px: nav gets slight background blur + border-bottom
+- Mobile (≤768px): hamburger icon, full-screen slide-in drawer, dark overlay, 56px touch targets, ESC key closes, clicking outside closes
+
+FOOTER (shared):
+Grey Taurus LLC · Operations • Logistics • Program Support
+Nav links repeated. Copyright line. admin@greytaurus.com
+
+PAGES:
+
+index.html — Home
+- Hero: full viewport height, headline "Operations, Logistics, and Program Support", subheadline "Grey Taurus provides flexible operational support for commercial, nonprofit, and multi-state initiatives.", two CTA text-links: "View Capabilities →" (links to capabilities.html) and "Contact Us →" (links to contact.html), subtle animated decorative line element
+- Section: Core Capabilities — 4-column icon grid, 8 items (Operations Support, Logistics Coordination, Program Administration, Vendor Management, Project Support, Facilities Support, Administrative Support, Procurement Support), each has Lucide icon + title + one-line description
+- Section: Why Grey Taurus — 3 points side by side: Flexible Engagement, Multi-State Reach, Cross-Sector Experience
+- Section: Partnership Model — short paragraph + 5 pill-style tags: Nonprofits · Real Estate Firms · Contractors · Vendors · Program Operators
+- Section: dark CTA block — "Let's Work Together" headline + "Contact Us →" link
+
+capabilities.html — Capabilities
+- Page header: "Capabilities" with breadcrumb label
+- 2-column grid, 8 numbered service items (01–08): number + title + 2-3 sentence description + thin divider line
+01 Operations Support: We coordinate end-to-end operational workflows for clients across commercial and nonprofit sectors. Our team ensures smooth execution from planning through delivery.
+02 Logistics Coordination: Grey Taurus manages the movement, scheduling, and tracking of resources across multi-state projects. We reduce friction and keep programs on time.
+03 Program Administration: From intake to reporting, we handle the administrative backbone of complex programs. Our structured approach keeps stakeholders aligned and documentation complete.
+04 Vendor Management: We identify, onboard, and manage vendor relationships on behalf of our clients. Our network spans contractors, suppliers, and service providers nationwide.
+05 Project Support: Grey Taurus provides embedded project support for both short-term assignments and long-term initiatives. We adapt quickly to evolving client needs.
+06 Facilities Support: We coordinate facility-related services including maintenance scheduling, space coordination, and facility vendor oversight.
+07 Administrative Support: Our team handles back-office functions including correspondence, scheduling, record-keeping, and reporting so clients can focus on their mission.
+08 Procurement Support: We assist clients in sourcing goods and services efficiently, managing procurement workflows and vendor negotiations.
+
+about.html — About
+- Page header: "About Grey Taurus"
+- 2-column layout: left has large pull quote "Flexible support. Multi-state reach. Proven delivery.", right has body paragraphs
+- Body: "Grey Taurus LLC is a Florida-based operations and logistics support company providing flexible program and project support services across commercial, nonprofit, and government initiatives. Founded with a focus on adaptability, Grey Taurus serves clients who need reliable operational infrastructure without the overhead of a large internal team. Our multi-state footprint allows us to mobilize quickly and support partners wherever they operate."
+- 3 key points listed: Florida-based LLC, Commercial + nonprofit clients, Multi-state initiative support
+- Approach section: "We work as an extension of our clients' teams — stepping in where capacity is needed, staying as long as the work requires, and exiting cleanly when the mission is complete."
+
+partnerships.html — Partnerships
+- Page header: "Partnership Model"
+- Intro: "Grey Taurus is built for collaboration. We integrate with partners across sectors to deliver seamless operational support."
+- 5 partner type sections, each with title + 2-sentence description:
+Nonprofits: We support nonprofit organizations with program administration, logistics, and back-office functions. Our team integrates with existing staff to extend capacity without adding permanent overhead.
+Real Estate Firms: Grey Taurus coordinates with licensed real estate professionals on property-related programs including housing placement and lease administration. We provide the operational layer that keeps transactions and placements on track.
+Contractors: We work alongside independent contractors and trade partners to coordinate scheduling, documentation, and project logistics. Our support keeps field operations connected to back-office requirements.
+Vendors: Grey Taurus manages vendor relationships on behalf of clients, from initial sourcing through ongoing account management. We ensure vendors are properly onboarded, compliant, and performing.
+Program Operators: For organizations running government-funded or grant-based programs, we provide the administrative and logistical infrastructure needed for compliance and delivery.
+- CTA text-link at bottom: "Start a Partnership Conversation →" links to contact.html
+
+contact.html — Contact
+- Page header: "Contact"
+- 2-column layout: left is the form, right is copy
+- Form fields: Name, Email, Organization, Message, Submit button
+- Right side copy: "Partnership inquiries welcome." + "We respond to all inquiries within 2 business days." + email: admin@greytaurus.com
+- Form validation: all fields required, show inline red error text if empty on submit, no actual form submission (action="#")
+
+CSS REQUIREMENTS (css/style.css):
+Organize into sections with comments: Reset, Variables, Typography, Layout, Navigation, Components, Forms, Animations, Responsive
+CSS custom properties in :root:
+--color-bg: #0f1117
+--color-bg-surface: #161b26
+--color-bg-card: #1a2030
+--color-border: rgba(255,255,255,0.06)
+--color-text: #e8eaf0
+--color-text-muted: #8a95a3
+--color-accent: #c9a96e
+--color-accent-hover: #d4b87a
+--ease: cubic-bezier(0.16, 1, 0.3, 1)
+--transition: all 0.25s var(--ease)
+Utility classes: .container, .section, .reveal, .text-muted, .grid-2, .grid-4
+Reveal animation: .reveal starts opacity:0 translateY(24px), .reveal.visible becomes opacity:1 translateY(0) transition 0.6s var(--ease)
+Stagger: .reveal children use --i variable for transition-delay: calc(var(--i,0) * 80ms)
+body.fade-out { opacity: 0; transition: 0.2s ease; }
+Sections: 96px–120px vertical padding
+Touch targets min 44px height
+
+JS REQUIREMENTS (js/main.js — ~150 lines max, no libraries):
+1. IntersectionObserver: watch all .reveal elements, add .visible class when in viewport
+2. Mobile nav: hamburger click opens drawer + overlay, X click closes, ESC key closes, click outside drawer closes
+3. Active nav: compare window.location.pathname to each nav link href, add .active class to matching link
+4. Sticky header: add .scrolled class to header when scrollY > 40
+5. Page transitions: on any internal link click, add body.fade-out class, wait 200ms, then navigate
+6. Form validation: on submit, check all fields filled, show inline .error-text if empty, prevent submit if errors
+
+SEO — every page must have:
+<title> — unique per page
+<meta name="description"> — unique per page
+<meta property="og:title">, og:description, og:type
+<link rel="canonical">
+JSON-LD on index.html only:
+{"@context":"https://schema.org","@type":"Organization","name":"Grey Taurus LLC","description":"Operations, logistics, and program support company","url":"https://greytaurus.com"}
+Performance: preconnect to fonts.googleapis.com and fonts.gstatic.com, defer on main.js
+Accessibility: aria-label="Main navigation" on nav, aria-label="Open menu" on hamburger, aria-label="Close menu" on X, proper h1/h2/h3 hierarchy, visible focus states on all interactive elements, skip-to-content link
+
+HARD RULES:
+- No lorem ipsum
+- No placeholder phone numbers
+- No fake testimonials or metrics
+- No broken links — all href values must point to real pages within the project using relative paths
+- No emojis
+- No console errors
+- CSS under 35kb, JS under 15kb
+- Mobile fully responsive, drawer works, 1-column layout on mobile
+- All 5 nav links work on every page
+
+Generate all 7 files completely. Do not truncate any file. Do not use placeholder comments like "// add styles here". Write every line.
