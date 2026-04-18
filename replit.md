@@ -26,6 +26,77 @@ pnpm workspace monorepo using TypeScript. Each package manages its own dependenc
 
 See the `pnpm-workspace` skill for workspace structure, TypeScript setup, and package details.
 
+## Platform Expansion (Tasks 1–13)
+
+### New Packages / Artifacts
+
+| Path | Purpose |
+|---|---|
+| `artifacts/hub/` | React SPA — login, dashboard, grants, subcontracts, reddit-intel pages |
+| `lib/db/src/schema/` | 8 new DB tables (see below) |
+| `artifacts/api-server/src/scrapers/` | SAM.gov, Grants.gov, USASpending, FL-VBS, Reddit scrapers |
+| `artifacts/api-server/src/agents/` | QA, deduplication, gap-detection agents + stubs |
+| `artifacts/api-server/src/email/` | Email service, guardrails, templates, daily brief |
+| `artifacts/api-server/src/scheduler.ts` | Daily cron at 06:00 America/New_York |
+| `artifacts/api-server/src/auth.ts` | Session-based auth (bcryptjs + express-session) |
+
+### New DB Tables
+
+`grants`, `subcontract_leads`, `prime_contractors`, `qa_flags`, `agent_logs`, `sent_emails`, `reddit_intel`, `opportunities`
+
+Run migration after setting DATABASE_URL:
+```bash
+corepack pnpm --filter @workspace/db run push
+```
+
+### New Environment Variables
+
+Add to `.env` (copy from `.env` in root — all keys present):
+
+| Variable | Required | Purpose |
+|---|---|---|
+| `DATABASE_URL` | ✅ Hard-fail | PostgreSQL connection string |
+| `SESSION_SECRET` | ✅ Hard-fail | Express session signing key |
+| `HUB_PASSWORD` | ✅ Hard-fail | Platform admin login password |
+| `BRIEF_RECIPIENT` | ✅ Hard-fail | Email for daily brief (admin@greytaurus.com) |
+| `ANTHROPIC_API_KEY` | ✅ Hard-fail | Claude API for QA agent |
+| `IONOS_USER` | ✅ Hard-fail | IONOS SMTP username |
+| `IONOS_PASSWORD` | ✅ Hard-fail | IONOS SMTP password |
+| `SAM_API_KEY` | ⚠️ Warn-only | SAM.gov API key (scraper skips without it) |
+| `GMAIL_USER` | ⚠️ Warn-only | Gmail fallback SMTP |
+| `GMAIL_APP_PASSWORD` | ⚠️ Warn-only | Gmail app password |
+
+### New API Routes
+
+| Method | Path | Auth |
+|---|---|---|
+| GET | `/api/grants` | No |
+| GET | `/api/subcontracts` | No |
+| GET | `/api/reddit-intel` | No |
+| PUT | `/api/reddit-intel/:id/action` | No |
+| GET | `/api/qa-flags` | No |
+| PUT | `/api/qa-flags/:id/resolve` | No |
+| POST | `/api/email/send` | ✅ Session |
+| POST | `/api/scan/run` | ✅ Session |
+| POST | `/api/auth/login` | No |
+| POST | `/api/auth/logout` | No |
+| GET | `/api/auth/session` | No |
+
+### Hub Frontend
+
+```bash
+cd artifacts/hub
+corepack pnpm dev   # starts on port 5173
+```
+
+Set `VITE_API_URL` to point at the api-server if not running on same host.
+Login at `/login` with username `admin` and your `HUB_PASSWORD`.
+
+### Railway Deployment
+
+`railway.json` is configured. Set all required env vars in Railway dashboard.
+Start command: `node artifacts/api-server/dist/index.mjs`
+
 ## Grey Taurus LLC Static Website
 
 A production-ready static website located at `grey-taurus/`. Pure HTML, CSS, and vanilla JavaScript — no frameworks, no build step.

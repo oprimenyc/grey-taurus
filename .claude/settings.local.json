@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(start \"C:\\\\Users\\\\jp718\\\\OneDrive\\\\Desktop\\\\grey-taurus\\\\grey-taurus\\\\index.html\")",
+      "Bash(git remote:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git config:*)",
+      "Bash(git push:*)"
+    ]
+  }
+}
