@@ -8,6 +8,8 @@ COPY . .
 
 RUN pnpm install --no-frozen-lockfile
 
+RUN pnpm --filter @workspace/hub run build
+
 RUN pnpm --filter @workspace/api-server run build
 
 EXPOSE 5000
