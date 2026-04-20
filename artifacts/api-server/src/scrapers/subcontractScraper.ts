@@ -39,18 +39,19 @@ export async function subcontractScraper(): Promise<Record<string, unknown>[]> {
           filters: {
             naics_codes: NAICS_CODES,
             award_type_codes: ["A", "B", "C", "D"],
-            time_period: [{ start_date: "2023-01-01", end_date: today }],
+            time_period: [{ start_date: "2024-01-01", end_date: today }],
           },
           fields: [
             "recipient_name",
             "awarding_agency_name",
             "award_amount",
-            "period_of_performance_end_date",
+            "period_of_performance_current_end_date",
             "naics_code",
             "generated_internal_id",
           ],
+          page: 1,
           limit: 50,
-          sort: "award_amount",
+          sort: "Award Amount",
           order: "desc",
         }),
       },
@@ -70,7 +71,7 @@ export async function subcontractScraper(): Promise<Record<string, unknown>[]> {
       const awardAmount = Number(item["award_amount"] || 0);
       if (awardAmount < 750_000) continue;
 
-      const expiryDate = item["period_of_performance_end_date"] as string | null;
+      const expiryDate = item["period_of_performance_current_end_date"] as string | null;
       if (expiryDate) {
         const monthsLeft = (new Date(expiryDate).getTime() - Date.now()) / (1000 * 60 * 60 * 24 * 30);
         if (monthsLeft <= 0 || monthsLeft > 18) continue;

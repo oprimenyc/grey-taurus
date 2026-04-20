@@ -33,6 +33,8 @@ export async function samScraper(): Promise<Record<string, unknown>[]> {
   try {
     const d = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000);
     const postedFrom = `${String(d.getMonth() + 1).padStart(2, "0")}/${String(d.getDate()).padStart(2, "0")}/${d.getFullYear()}`;
+    const today = new Date();
+    const postedTo = `${String(today.getMonth() + 1).padStart(2, "0")}/${String(today.getDate()).padStart(2, "0")}/${today.getFullYear()}`;
 
     const params = new URLSearchParams({
       api_key: apiKey,
@@ -40,6 +42,7 @@ export async function samScraper(): Promise<Record<string, unknown>[]> {
       naics: NAICS_CODES.join(","),
       limit: "50",
       postedFrom,
+      postedTo,
     });
 
     const url = `https://api.sam.gov/opportunities/v2/search?${params.toString()}`;
