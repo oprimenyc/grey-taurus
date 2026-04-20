@@ -14,4 +14,4 @@ RUN pnpm --filter @workspace/api-server run build
 
 EXPOSE 5000
 
-CMD ["sh", "-c", "cd /app && (pnpm --filter @workspace/db run push --force || echo 'Migration failed, continuing') && node artifacts/api-server/dist/index.mjs"]
+CMD ["node", "artifacts/api-server/dist/index.mjs"]

@@ -2,6 +2,7 @@ import app from "./app.js";
 import { logger } from "./lib/logger.js";
 import { initAuth } from "./auth.js";
 import { startScheduler } from "./scheduler.js";
+import { runMigrations } from "@workspace/db";
 
 // Hard-fail env vars
 const REQUIRED_ENV = [
@@ -31,6 +32,10 @@ for (const key of OPTIONAL_ENV) {
 const port = Number(process.env["PORT"] ?? 5000);
 
 async function main(): Promise<void> {
+  logger.info("Running database migrations...");
+  await runMigrations();
+  logger.info("Database migrations complete");
+
   await initAuth();
   startScheduler();
 
