@@ -68,7 +68,7 @@ app.use("/api", router);
 
 const frontendDist = path.join(process.cwd(), "artifacts/hub/dist");
 app.use(express.static(frontendDist));
-app.get("/*", (_req, res) => {
+app.use((_req, res) => {
   res.sendFile(path.join(frontendDist, "index.html"));
 });
 
