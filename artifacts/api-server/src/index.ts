@@ -12,7 +12,6 @@ const REQUIRED_ENV = [
   "IONOS_PASSWORD",
   "BRIEF_RECIPIENT",
   "HUB_PASSWORD",
-  "PORT",
 ];
 
 for (const key of REQUIRED_ENV) {
@@ -29,12 +28,7 @@ for (const key of OPTIONAL_ENV) {
   }
 }
 
-const rawPort = process.env["PORT"]!;
-const port = Number(rawPort);
-
-if (Number.isNaN(port) || port <= 0) {
-  throw new Error(`Invalid PORT value: "${rawPort}"`);
-}
+const port = Number(process.env["PORT"] ?? 5000);
 
 async function main(): Promise<void> {
   await initAuth();

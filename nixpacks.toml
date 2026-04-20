@@ -5,7 +5,7 @@ nixPkgs = ["nodejs-22_x"]
 cmds = ["npm install -g pnpm@9", "pnpm install --frozen-lockfile"]
 
 [phases.build]
-cmds = ["pnpm run build"]
+cmds = ["pnpm --filter @workspace/api-server run build"]
 
 [start]
-cmd = "node artifacts/api-server/dist/index.js"
+cmd = "node artifacts/api-server/dist/index.mjs"
