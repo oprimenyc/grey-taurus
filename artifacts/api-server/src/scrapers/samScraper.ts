@@ -31,31 +31,31 @@ export async function samScraper(): Promise<Record<string, unknown>[]> {
   }
 
   try {
-    const postedFrom = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000)
-      .toISOString()
-      .split("T")[0]!;
+    const d = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000);
+    const postedFrom = `${String(d.getMonth() + 1).padStart(2, "0")}/${String(d.getDate()).padStart(2, "0")}/${d.getFullYear()}`;
 
     const params = new URLSearchParams({
       api_key: apiKey,
       ptype: "o",
-      ncode: NAICS_CODES.join(","),
+      naics: NAICS_CODES.join(","),
       limit: "50",
-      active: "true",
       postedFrom,
     });
 
-    const response = await fetch(
-      `https://api.sam.gov/opportunities/v2/search?${params.toString()}`,
-      { headers: { Accept: "application/json" } },
-    );
+    const url = `https://api.sam.gov/opportunities/v2/search?${params.toString()}`;
+    logger.info({ url: url.replace(apiKey, "REDACTED") }, "samScraper: calling SAM.gov");
+
+    const response = await fetch(url, { headers: { Accept: "application/json" } });
 
     if (!response.ok) {
-      logger.warn({ status: response.status }, "SAM.gov API returned non-200");
+      const body = await response.text();
+      logger.warn({ status: response.status, body }, "SAM.gov API returned non-200");
       return [];
     }
 
-    const data = (await response.json()) as { opportunitiesData?: unknown[] };
+    const data = (await response.json()) as { opportunitiesData?: unknown[]; totalRecords?: number };
     const items = data.opportunitiesData ?? [];
+    logger.info({ totalRecords: data.totalRecords ?? "unknown", returned: items.length }, "samScraper: SAM.gov response received");
 
     const results: Record<string, unknown>[] = [];
 
