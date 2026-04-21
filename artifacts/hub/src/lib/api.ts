@@ -38,14 +38,18 @@ export const api = {
       request(`/opportunities/${id}/status`, { method: "PUT", body: JSON.stringify({ status }) }),
   },
   pipeline: {
-    list: (page = 1, limit = 20) => request<{ data: PipelineItem[]; page: number }>(`/pipeline?page=${page}&limit=${limit}`),
+    list: (page = 1, limit = 100) => request<{ data: PipelineItem[]; page: number }>(`/pipeline?page=${page}&limit=${limit}`),
     updateStage: (id: number, stage: string) =>
       request(`/pipeline/${id}/stage`, { method: "PUT", body: JSON.stringify({ stage }) }),
+    add: (data: { opportunityId?: number; title: string; agency?: string; score?: number; naicsCode?: string; responseDeadline?: string }) =>
+      request<{ ok: boolean; data: PipelineItem }>("/pipeline", { method: "POST", body: JSON.stringify(data) }),
   },
   proposals: {
     list: (page = 1, limit = 20) => request<{ data: Proposal[]; page: number }>(`/proposals?page=${page}&limit=${limit}`),
     updateStatus: (id: number, status: string) =>
       request(`/proposals/${id}/status`, { method: "PUT", body: JSON.stringify({ status }) }),
+    updateContent: (id: number, content: string) =>
+      request(`/proposals/${id}/content`, { method: "PUT", body: JSON.stringify({ content }) }),
   },
   outreach: {
     list: (page = 1, limit = 20) => request<{ data: OutreachItem[]; page: number }>(`/outreach?page=${page}&limit=${limit}`),
@@ -55,6 +59,8 @@ export const api = {
   agents: {
     runs: (limit = 50) => request<{ data: AgentRun[] }>(`/agents/runs?limit=${limit}`),
     logs: (limit = 50) => request<{ data: AgentLog[] }>(`/agents/logs?limit=${limit}`),
+    run: (agentName: string) =>
+      request<{ ok: boolean; agentName: string; message: string }>(`/agents/run/${agentName}`, { method: "POST" }),
   },
   settings: {
     list: () => request<{ data: Setting[] }>("/settings"),
@@ -80,6 +86,7 @@ export interface Grant {
   score: number | null;
   status: string | null;
   eligibleEntity: string | null;
+  description?: string | null;
   addedDate: string | null;
 }
 

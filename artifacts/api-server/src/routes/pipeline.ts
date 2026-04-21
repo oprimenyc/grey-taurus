@@ -2,13 +2,14 @@ import { Router } from "express";
 import { db } from "@workspace/db";
 import { pipelineTable } from "@workspace/db/schema";
 import { desc, eq } from "drizzle-orm";
+import { requireAuth } from "../middlewares/requireAuth.js";
 
 const router = Router();
 
 router.get("/pipeline", async (req, res) => {
   try {
     const page = Math.max(1, Number(req.query["page"] || 1));
-    const limit = Math.min(50, Number(req.query["limit"] || 20));
+    const limit = Math.min(200, Number(req.query["limit"] || 100));
     const offset = (page - 1) * limit;
 
     const rows = await db
@@ -21,6 +22,38 @@ router.get("/pipeline", async (req, res) => {
     res.json({ data: rows, page, limit });
   } catch {
     res.status(500).json({ error: "Failed to fetch pipeline" });
+  }
+});
+
+router.post("/pipeline", requireAuth, async (req, res) => {
+  try {
+    const { opportunityId, title, agency, score, naicsCode, responseDeadline } = req.body as {
+      opportunityId?: number;
+      title: string;
+      agency?: string;
+      score?: number;
+      naicsCode?: string;
+      responseDeadline?: string;
+    };
+
+    if (!title) {
+      res.status(400).json({ error: "Title is required" });
+      return;
+    }
+
+    const [row] = await db.insert(pipelineTable).values({
+      opportunityId: opportunityId ?? null,
+      title,
+      agency: agency ?? null,
+      stage: "identified",
+      score: score ?? 0,
+      naicsCode: naicsCode ?? null,
+      responseDeadline: responseDeadline ? new Date(responseDeadline) : null,
+    }).returning();
+
+    res.json({ ok: true, data: row });
+  } catch {
+    res.status(500).json({ error: "Failed to add to pipeline" });
   }
 });
 

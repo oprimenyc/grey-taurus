@@ -2,6 +2,7 @@ import { Router } from "express";
 import { db } from "@workspace/db";
 import { proposalsTable } from "@workspace/db/schema";
 import { desc, eq } from "drizzle-orm";
+import { requireAuth } from "../middlewares/requireAuth.js";
 
 const router = Router();
 
@@ -32,6 +33,17 @@ router.put("/proposals/:id/status", async (req, res) => {
     res.json({ ok: true });
   } catch {
     res.status(500).json({ error: "Failed to update proposal status" });
+  }
+});
+
+router.put("/proposals/:id/content", requireAuth, async (req, res) => {
+  try {
+    const id = Number(req.params["id"]);
+    const { content } = req.body as { content: string };
+    await db.update(proposalsTable).set({ content, updatedAt: new Date() }).where(eq(proposalsTable.id, id));
+    res.json({ ok: true });
+  } catch {
+    res.status(500).json({ error: "Failed to update proposal content" });
   }
 });
 
